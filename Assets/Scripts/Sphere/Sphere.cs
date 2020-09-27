@@ -1,35 +1,22 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Sphere : MonoBehaviour
 {
-  private int _money;
-
   public event UnityAction<int> ScoreChanged;
-  public event UnityAction Died;
+
+  private int _score = 0;
 
   private void Start()
   {
-    ScoreChanged?.Invoke(_money);
+    ScoreChanged?.Invoke(_score);
   }
 
-  public void TakeDamage()
+  public void TakeCoin()
   {
-    Die();
-  }
-
-  public void TakeBonus()
-  {
-    _money++;
-    ScoreChanged?.Invoke(_money);
-  }
-
-  public void Die()
-  {
-    Died?.Invoke();
-    Destroy(gameObject);
+    _score += 1;
+    ScoreChanged?.Invoke(_score);
   }
 }

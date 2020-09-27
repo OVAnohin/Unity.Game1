@@ -4,11 +4,11 @@ using UnityEngine.UI;
 
 public class MenuControl : MonoBehaviour
 {
-  [SerializeField] private Button _startGame = default;
-  [SerializeField] private Button _exitGame = default;
-  [SerializeField] private Button _showAuthors = default;
-  [SerializeField] private string _sceneName = default;
-  [SerializeField] private GameObject _authorsPanel = default;
+  [SerializeField] private Button _startGame;
+  [SerializeField] private Button _exitGame;
+  [SerializeField] private Button _showAuthors;
+  [SerializeField] private string _sceneName;
+  [SerializeField] private GameObject _authorsPanel;
 
   private void OnEnable()
   {

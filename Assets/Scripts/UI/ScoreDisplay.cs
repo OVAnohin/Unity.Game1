@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class ScoreDisplay : MonoBehaviour
@@ -10,16 +8,16 @@ public class ScoreDisplay : MonoBehaviour
 
   private void OnEnable()
   {
-    _sphere.ScoreChanged += ChangeScoreOnDisplay;
+    _sphere.ScoreChanged += DisplayScore;
   }
 
   private void OnDisable()
   {
-    _sphere.ScoreChanged -= ChangeScoreOnDisplay;
+    _sphere.ScoreChanged -= DisplayScore;
   }
 
-  private void ChangeScoreOnDisplay(int health)
+  private void DisplayScore(int score)
   {
-    _scoreDisplay.text = health.ToString();
+    _scoreDisplay.text = score.ToString();
   }
 }
