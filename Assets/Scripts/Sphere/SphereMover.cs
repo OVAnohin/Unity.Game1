@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 
@@ -11,6 +9,7 @@ public class SphereMover : MonoBehaviour
   [SerializeField] private float _jumpForce;
 
   private Rigidbody _rigidbody;
+  private bool _isJumping = false;
 
   private void Awake()
   {
@@ -19,13 +18,18 @@ public class SphereMover : MonoBehaviour
 
   private void Update()
   {
-    if (Input.GetKey(KeyCode.Space) && _rigidbody.velocity == Vector3.zero)
+    if (Input.GetKey(KeyCode.Space) && _isJumping == false)
     {
       _rigidbody.velocity = Vector3.up * _jumpForce;
+      _isJumping = true;
     }
 
     transform.position = transform.position + Vector3.right * _speed * Time.deltaTime;
     transform.Rotate(0, 0, _zAngle);
+  }
 
+  private void OnCollisionEnter(Collision collision)
+  {
+    _isJumping = false;
   }
 }
