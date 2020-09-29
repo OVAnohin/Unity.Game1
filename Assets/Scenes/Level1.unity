@@ -216,11 +216,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2467f4a7d87b60b4498c8caf9bd4f4f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ground: {fileID: 4573007207774703476, guid: 2bc7810ff169d8849afdcb1c5c00f154, type: 3}
+  _groundPrefab: {fileID: 4573007207774703476, guid: 2bc7810ff169d8849afdcb1c5c00f154,
+    type: 3}
+  _coinPrefab: {fileID: 961672164154834500, guid: 01bac4403b3959545b4a108b89012fa3,
+    type: 3}
   _groundPool: {fileID: 177836063}
   _player: {fileID: 816856503}
   _x: 30
   _z: 20
+  _coin: 5
+  _boulder: 15
 --- !u!4 &177836063
 Transform:
   m_ObjectHideFlags: 0

@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class GroundGenerator : MonoBehaviour
 {
-  [SerializeField] private GameObject _ground;
+  [SerializeField] private GameObject _groundPrefab;
+  [SerializeField] private GameObject _coinPrefab;
   [SerializeField] private Transform _groundPool;
   [SerializeField] private Sphere _player;
   [SerializeField] private int _x;
   [SerializeField] private int _z;
+  [SerializeField] private int _coin;
+  [SerializeField] private int _boulder;
 
   private int _startX;
   private int _startZ;
   private int _nextStep = 1;
   private Queue<GameObject> _grounds = new Queue<GameObject>();
+  private Queue<GameObject> _layerOnGrounds = new Queue<GameObject>();
   private int _deltaX;
   private int _lastX;
 
@@ -26,13 +30,43 @@ public class GroundGenerator : MonoBehaviour
     _deltaX = _x + (-_startX);
     _lastX = _x;
 
+    HashSet<int> collisionsCoin = new HashSet<int>();
+    HashSet<int> collisionsBoulder = new HashSet<int>();
+
+    collisionsCoin = FillCollisions(collisionsCoin, _coin);
+    collisionsBoulder = FillCollisions(collisionsBoulder, _boulder);
+
+    int i = 0;
     for (int x = _startX; x < _x; x++)
       for (int z = _startZ; z < _z; z++)
       {
-        GameObject spawned = Instantiate(_ground, _groundPool);
-        spawned.transform.position = new Vector3(x, _groundPool.position.y, z);
-        _grounds.Enqueue(spawned);
+        GameObject spawnedGround = Instantiate(_groundPrefab, _groundPool);
+        spawnedGround.transform.position = new Vector3(x, _groundPool.position.y, z);
+        _grounds.Enqueue(spawnedGround);
+        
+        if (collisionsCoin.Contains(i))
+        {
+          GameObject spawnedCoin = Instantiate(_coinPrefab, _groundPool);
+          spawnedCoin.transform.position = new Vector3(x, _groundPool.position.y + 1, z);
+          _layerOnGrounds.Enqueue(spawnedCoin);
+        }
+
+        i += 1;
       }
+  }
+
+  private HashSet<int> FillCollisions(HashSet<int> collisions, int count)
+  {
+    for (int i = 0; i < count; i++)
+    {
+      int elem = Random.Range(0, _deltaX * (_z + (-_startZ)));
+      while (collisions.Contains(elem))
+        elem = Random.Range(0, _deltaX * (_z + (-_startZ)));
+
+      collisions.Add(elem);
+    }
+
+    return collisions;
   }
 
   private void Update()
