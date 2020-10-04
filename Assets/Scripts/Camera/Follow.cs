@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Follow : MonoBehaviour
 {
-  [SerializeField] private Transform _target;
-  [SerializeField] private Transform _camera;
-  [SerializeField] private float _deltaX;
+    [SerializeField] private Transform _target;
+    [SerializeField] private Transform _camera;
+    [SerializeField] private float _deltaX;
 
-  private void LateUpdate()
-  {
-    _camera.position = new Vector3(_target.position.x + _deltaX, 0, -10);
-  }
+    private void LateUpdate()
+    {
+        _camera.position = new Vector3(_target.position.x + _deltaX,
+                                       _camera.position.y,
+                                       _camera.position.z);
+    }
 }

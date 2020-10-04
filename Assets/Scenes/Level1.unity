@@ -220,12 +220,14 @@ MonoBehaviour:
     type: 3}
   _coinPrefab: {fileID: 961672164154834500, guid: 01bac4403b3959545b4a108b89012fa3,
     type: 3}
+  _boulderPrefab: {fileID: 5685355693221574024, guid: 4ddd3ef88cba96b46b73c3012bdc57e1,
+    type: 3}
   _groundPool: {fileID: 177836063}
   _player: {fileID: 816856503}
-  _x: 30
+  _x: 50
   _z: 20
-  _coin: 5
-  _boulder: 15
+  _coin: 15
+  _boulder: 25
 --- !u!4 &177836063
 Transform:
   m_ObjectHideFlags: 0
@@ -317,13 +319,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506072157}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
+  m_LocalPosition: {x: 0, y: 8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
 --- !u!114 &506072161
 MonoBehaviour:
   m_ObjectHideFlags: 0
