@@ -10,8 +10,6 @@ public class Follow : MonoBehaviour
 
     private void LateUpdate()
     {
-        _camera.position = new Vector3(_target.position.x + _deltaX,
-                                       _camera.position.y,
-                                       _camera.position.z);
+        _camera.position = new Vector3(_target.position.x + _deltaX, _camera.position.y, _camera.position.z);
     }
 }

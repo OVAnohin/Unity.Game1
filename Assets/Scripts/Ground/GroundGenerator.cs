@@ -46,6 +46,26 @@ public class GroundGenerator : MonoBehaviour
             }
     }
 
+    private void Update()
+    {
+        if (_player.transform.position.x >= _nextStep)
+        {
+            _nextStep += 1;
+
+            while ((_grounds.Peek().transform.position.x * -1) + _lastX == _deltaX)
+                MoveTailToHead(_grounds, _grounds.Peek().transform.position.z);
+
+            HashSet<int> zPositions = new HashSet<int>();
+            while ((_layerOnGrounds.Peek().transform.position.x * -1) + _lastX == _deltaX)
+            {
+                int zPosition = GenerateNewZPosition(zPositions);
+                MoveTailToHead(_layerOnGrounds, zPosition);
+            }
+
+            _lastX += 1;
+        }
+    }
+
     private GameObject GenerateGround(GameObject prefab, int x, int y, int z)
     {
         GameObject spawned = Instantiate(prefab, _groundPool);
@@ -78,36 +98,21 @@ public class GroundGenerator : MonoBehaviour
         return timeHashSet;
     }
 
-    private void Update()
+    private int GenerateNewZPosition(HashSet<int> positions)
     {
-        if (_player.transform.position.x >= _nextStep)
-        {
-            _nextStep += 1;
+        int position = Random.Range(_startZ, _z);
+        while (positions.Contains(position))
+            position = Random.Range(_startZ, _z);
 
-            while ((_grounds.Peek().transform.position.x * -1) + _lastX == _deltaX)
-            {
-                GameObject ground = _grounds.Dequeue();
-                ground.transform.position = new Vector3(_lastX, ground.transform.position.y, ground.transform.position.z);
-                _grounds.Enqueue(ground);
-            }
-
-            HashSet<int> positions = new HashSet<int>();
-            while ((_layerOnGrounds.Peek().transform.position.x * -1) + _lastX == _deltaX)
-            {
-                GameObject element = _layerOnGrounds.Dequeue();
-
-                int zPosition = Random.Range(_startZ, _z);
-                while (positions.Contains(zPosition))
-                    zPosition = Random.Range(_startZ, _z);
-
-                positions.Add(zPosition);
-                element.transform.position = new Vector3(_lastX, element.transform.position.y, zPosition);
-                element.SetActive(true);
-                _layerOnGrounds.Enqueue(element);
-            }
-
-            _lastX += 1;
-        }
+        positions.Add(position);
+        return position;
     }
 
+    private void MoveTailToHead(Queue<GameObject> queue, float zPosition)
+    {
+        GameObject element = queue.Dequeue();
+        element.transform.position = new Vector3(_lastX, element.transform.position.y, zPosition);
+        element.SetActive(true);
+        queue.Enqueue(element);
+    }
 }
