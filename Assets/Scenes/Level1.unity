@@ -218,16 +218,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _groundPrefab: {fileID: 4573007207774703476, guid: 2bc7810ff169d8849afdcb1c5c00f154,
     type: 3}
-  _coinPrefab: {fileID: 961672164154834500, guid: 01bac4403b3959545b4a108b89012fa3,
-    type: 3}
-  _boulderPrefab: {fileID: 5685355693221574024, guid: 4ddd3ef88cba96b46b73c3012bdc57e1,
-    type: 3}
   _groundPool: {fileID: 177836063}
   _player: {fileID: 816856503}
-  _x: 50
-  _z: 20
-  _coin: 15
-  _boulder: 25
+  _lengthPlayingField: 50
+  _widthPlayingField: 20
 --- !u!4 &177836063
 Transform:
   m_ObjectHideFlags: 0
@@ -339,8 +333,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 816856502}
-  _camera: {fileID: 506072160}
-  _deltaX: 3
+  _selfTransform: {fileID: 506072160}
+  _offsetY: 9
+  _offsetZ: -10
 --- !u!1 &601733458
 GameObject:
   m_ObjectHideFlags: 0
