@@ -28,25 +28,25 @@ public abstract class Spawner : ObjectPool
             int pointX = (int)_spawnPoint.transform.position.x;
             _nextSpawn = _random.Next(pointX + 2, pointX + 5);
 
-            GenerateNewBoulders();
+            SpawnNewObjects();
 
             DisableObjectAbroadScreen();
         }
     }
 
-    private void GenerateNewBoulders()
+    private void SpawnNewObjects()
     {
-        int generatesInOneCycle = _random.Next(0, (int)(_widthSpawner * 0.2f));
+        int elementsInOneCycle = _random.Next(0, (int)(_widthSpawner * 0.2f));
         HashSet<int> positions = new HashSet<int>();
-        positions = FillPositions(positions, generatesInOneCycle);
+        positions = FillPositions(positions, elementsInOneCycle);
 
         foreach (int item in positions)
         {
-            if (TryGetObject(out GameObject boulder))
+            if (TryGetObject(out GameObject element))
             {
-                boulder.SetActive(true);
+                element.SetActive(true);
                 _spawnPoint.position = new Vector3(_target.position.x + _offset.x, _offset.y, _offset.z + item);
-                boulder.transform.position = _spawnPoint.position;
+                element.transform.position = _spawnPoint.position;
             }
         }
     }
@@ -56,11 +56,11 @@ public abstract class Spawner : ObjectPool
         HashSet<int> timeHashSet = new HashSet<int>();
         for (int i = 0; i < count; i++)
         {
-            int elem = GetRandomPlace();
-            while (positions.Contains(elem))
-                elem = GetRandomPlace();
+            int place = GetRandomPlace();
+            while (positions.Contains(place))
+                place = GetRandomPlace();
 
-            timeHashSet.Add(elem);
+            timeHashSet.Add(place);
         }
 
         return timeHashSet;
