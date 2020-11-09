@@ -7,17 +7,14 @@ public abstract class ObjectPool : MonoBehaviour
 {
     [SerializeField] private GameObject _container;
     [SerializeField] private int _capacity;
+    [SerializeField] private Transform _checkPoint;
 
     protected GameObject Container => _container;
 
     private List<GameObject> _pool = new List<GameObject>();
-    private Camera _camera;
-
 
     protected void Initialize(GameObject prefab)
     {
-        _camera = Camera.main;
-
         for (int i = 0; i < _capacity; i++)
         {
             GameObject spawned = Instantiate(prefab, _container.transform);
@@ -44,8 +41,7 @@ public abstract class ObjectPool : MonoBehaviour
         {
             if (item.activeSelf == true)
             {
-                Vector3 point = _camera.WorldToViewportPoint(item.transform.position);
-                if (point.x < -0.5)
+                if (_checkPoint.position.x > item.transform.position.x)
                 {
                     item.SetActive(false);
                     item.transform.parent = Container.transform;

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
+
 
 public abstract class Spawner : ObjectPool
 {
@@ -9,9 +11,9 @@ public abstract class Spawner : ObjectPool
     [SerializeField] private Transform _target;
     [SerializeField] private int _widthSpawner;
 
-    private System.Random _random = new System.Random();
     private Vector3 _offset;
-    int _nextSpawn = 1;
+    private int _nextPointStepSpawn = 1;
+    private Random _random = new Random();
 
     private void Start()
     {
@@ -23,10 +25,10 @@ public abstract class Spawner : ObjectPool
     {
         _spawnPoint.position = new Vector3(_target.position.x, _offset.y, _offset.z);
 
-        if (_spawnPoint.transform.position.x >= _nextSpawn)
+        if (_spawnPoint.transform.position.x >= _nextPointStepSpawn)
         {
             int pointX = (int)_spawnPoint.transform.position.x;
-            _nextSpawn = _random.Next(pointX + 2, pointX + 5);
+            _nextPointStepSpawn = _random.Next(pointX + 2, pointX + 5);
 
             SpawnNewObjects();
 
@@ -68,6 +70,6 @@ public abstract class Spawner : ObjectPool
 
     private int GetRandomPlace()
     {
-        return Random.Range(-(_widthSpawner / 2), _widthSpawner / 2);
+        return UnityEngine.Random.Range(-(_widthSpawner / 2), _widthSpawner / 2);
     }
 }
