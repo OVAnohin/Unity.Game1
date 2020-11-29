@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
-
+using UnityRandom = UnityEngine.Random;
 
 public abstract class Spawner : ObjectPool
 {
@@ -12,35 +11,39 @@ public abstract class Spawner : ObjectPool
     [SerializeField] private int _widthSpawner;
 
     private Vector3 _offset;
-    private int _nextPointStepSpawn = 1;
-    private Random _random = new Random();
+    private int _nextCheckpoint = 1;
 
     private void Start()
     {
-        _offset = new Vector3(_spawnPoint.position.x - _target.position.x, _spawnPoint.position.y, _spawnPoint.position.z);
+        _offset = _spawnPoint.position - _target.position;
         Initialize(_prefab);
     }
 
     private void Update()
     {
-        _spawnPoint.position = new Vector3(_target.position.x, _offset.y, _offset.z);
+        _spawnPoint.position = _target.position + _offset;
 
-        if (_spawnPoint.transform.position.x >= _nextPointStepSpawn)
+        if (_spawnPoint.position.x >= _nextCheckpoint)
         {
-            int pointX = (int)_spawnPoint.transform.position.x;
-            _nextPointStepSpawn = _random.Next(pointX + 2, pointX + 5);
+            int pointX = (int)_spawnPoint.position.x;
+            SetNextCheckpoint(pointX);
 
             SpawnNewObjects();
-
             DisableObjectAbroadScreen();
         }
     }
 
+    private void SetNextCheckpoint(int pointX)
+    {
+        int randomOffset = UnityRandom.Range(2, 5);
+        _nextCheckpoint = pointX + randomOffset;
+    }
+
     private void SpawnNewObjects()
     {
-        int elementsInOneCycle = _random.Next(0, (int)(_widthSpawner * 0.2f));
+        int elementsInOneCycle = UnityRandom.Range(0, (int)(_widthSpawner * 0.2f));
         HashSet<int> positions = new HashSet<int>();
-        positions = FillPositions(positions, elementsInOneCycle);
+        positions = CreatingUniquePositions(positions, elementsInOneCycle);
 
         foreach (int item in positions)
         {
@@ -53,7 +56,7 @@ public abstract class Spawner : ObjectPool
         }
     }
 
-    private HashSet<int> FillPositions(HashSet<int> positions, int count)
+    private HashSet<int> CreatingUniquePositions(HashSet<int> positions, int count)
     {
         HashSet<int> timeHashSet = new HashSet<int>();
         for (int i = 0; i < count; i++)
@@ -70,6 +73,6 @@ public abstract class Spawner : ObjectPool
 
     private int GetRandomPlace()
     {
-        return UnityEngine.Random.Range(-(_widthSpawner / 2), _widthSpawner / 2);
+        return UnityRandom.Range(-(_widthSpawner / 2), _widthSpawner / 2);
     }
 }

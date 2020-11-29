@@ -5,17 +5,16 @@ using UnityEngine;
 public class Follow : MonoBehaviour
 {
     [SerializeField] private Transform _target;
-    [SerializeField] private Transform _selfTransform;
-    [SerializeField] private float _offsetY;
-    [SerializeField] private float _offsetZ;
+    
+    private Vector3 _offset;
 
     private void Start()
     {
-        _offsetY = _target.position.y + _offsetY;
+        _offset = transform.position;
     }
 
     private void LateUpdate()
     {
-        _selfTransform.position = new Vector3(_target.position.x, _offsetY, _offsetZ);
+        transform.position = new Vector3(_target.position.x, _offset.y, _offset.z);
     }
 }

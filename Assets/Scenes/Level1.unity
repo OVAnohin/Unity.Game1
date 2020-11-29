@@ -384,9 +384,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 816856502}
-  _selfTransform: {fileID: 506072160}
-  _offsetY: 9
-  _offsetZ: -10
 --- !u!1 &520898931
 GameObject:
   m_ObjectHideFlags: 0
