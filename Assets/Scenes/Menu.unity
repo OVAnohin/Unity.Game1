@@ -250,6 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _time: 15
+  _offset: 0.95
 --- !u!114 &373061064
 MonoBehaviour:
   m_ObjectHideFlags: 0

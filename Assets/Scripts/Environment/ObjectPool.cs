@@ -15,12 +15,26 @@ public abstract class ObjectPool : MonoBehaviour
 
     protected void Initialize(GameObject prefab)
     {
+        SetCheckPoint();
+
         for (int i = 0; i < _capacity; i++)
         {
             GameObject spawned = Instantiate(prefab, _container.transform);
             spawned.SetActive(false);
             _pool.Add(spawned);
         }
+    }
+
+    private void SetCheckPoint()
+    {
+        float angle = Camera.main.fieldOfView;
+        float radiantAngle = (90 - angle) * (Mathf.PI / 180);
+        float tangens = Mathf.Tan(radiantAngle);
+
+        float y = Mathf.Abs(Camera.main.transform.position.z) * tangens;
+        float x = -(((Screen.currentResolution.width * y) / Screen.currentResolution.height) + 1);
+
+        _checkPoint.position = new Vector3(x, 0, 0);
     }
 
     protected void Initialize(GameObject[] prefabs)

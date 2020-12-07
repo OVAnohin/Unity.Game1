@@ -43,7 +43,7 @@ public abstract class Spawner : ObjectPool
     {
         int elementsInOneCycle = UnityRandom.Range(0, (int)(_widthSpawner * 0.2f));
         HashSet<int> positions = new HashSet<int>();
-        positions = CreatingUniquePositions(positions, elementsInOneCycle);
+        positions = CreatePositions(positions, elementsInOneCycle);
 
         foreach (int item in positions)
         {
@@ -56,19 +56,19 @@ public abstract class Spawner : ObjectPool
         }
     }
 
-    private HashSet<int> CreatingUniquePositions(HashSet<int> positions, int count)
+    private HashSet<int> CreatePositions(HashSet<int> positions, int count)
     {
-        HashSet<int> timeHashSet = new HashSet<int>();
+        HashSet<int> newPositions = new HashSet<int>();
+        int place;
+
         for (int i = 0; i < count; i++)
         {
-            int place = GetRandomPlace();
-            while (positions.Contains(place))
-                place = GetRandomPlace();
-
-            timeHashSet.Add(place);
+            place = GetRandomPlace();
+            if (!positions.Contains(place))
+                newPositions.Add(place);
         }
 
-        return timeHashSet;
+        return newPositions;
     }
 
     private int GetRandomPlace()
