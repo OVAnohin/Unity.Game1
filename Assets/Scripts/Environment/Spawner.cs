@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityRandom = UnityEngine.Random;
+using SystemRandom = System.Random;
+using System;
 
 public abstract class Spawner : ObjectPool
 {
@@ -9,13 +11,16 @@ public abstract class Spawner : ObjectPool
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Transform _target;
     [SerializeField] private int _widthSpawner;
+    [SerializeField] private Transform _checkPoint;
 
     private Vector3 _offset;
     private int _nextCheckpoint = 1;
+    private SystemRandom _systemRandom = new SystemRandom();
 
     private void Start()
     {
         _offset = _spawnPoint.position - _target.position;
+        _checkPoint.position =  СalculateStartCheckPointPosition();
         Initialize(_prefab);
     }
 
@@ -29,8 +34,20 @@ public abstract class Spawner : ObjectPool
             SetNextCheckpoint(pointX);
 
             SpawnNewObjects();
-            DisableObjectAbroadScreen();
+            DisableObjectAbroadScreen(_checkPoint.position.x);
         }
+    }
+
+    private Vector3 СalculateStartCheckPointPosition()
+    {
+        float angle = Camera.main.fieldOfView;
+        float radiantAngle = (90 - angle) * (Mathf.PI / 180);
+        float tangens = Mathf.Tan(radiantAngle);
+
+        float y = Mathf.Abs(Camera.main.transform.position.z) * tangens;
+        float x = -(((Screen.currentResolution.width * y) / Screen.currentResolution.height) + 1);
+
+        return new Vector3(x, 0, 0);
     }
 
     private void SetNextCheckpoint(int pointX)
@@ -41,9 +58,8 @@ public abstract class Spawner : ObjectPool
 
     private void SpawnNewObjects()
     {
-        int elementsInOneCycle = UnityRandom.Range(0, (int)(_widthSpawner * 0.2f));
-        HashSet<int> positions = new HashSet<int>();
-        positions = CreatePositions(positions, elementsInOneCycle);
+        int numberOfObject = UnityRandom.Range(0, (int)(_widthSpawner * 0.2f));
+        IEnumerable positions = CreatePositions(numberOfObject);
 
         foreach (int item in positions)
         {
@@ -56,23 +72,32 @@ public abstract class Spawner : ObjectPool
         }
     }
 
-    private HashSet<int> CreatePositions(HashSet<int> positions, int count)
+    private IEnumerable CreatePositions(int count)
     {
-        HashSet<int> newPositions = new HashSet<int>();
-        int place;
+        int[] positions = new int[_widthSpawner];
+        int[] newPositions = new int[count];
 
-        for (int i = 0; i < count; i++)
-        {
-            place = GetRandomPlace();
-            if (!positions.Contains(place))
-                newPositions.Add(place);
-        }
+        for (int i = 0; i < _widthSpawner; i++)
+            positions[i] = i - _widthSpawner / 2;
+
+        Shuffle(_systemRandom, positions);
+        Array.Copy(positions, newPositions, count);
 
         return newPositions;
     }
 
-    private int GetRandomPlace()
+    private void Shuffle(SystemRandom rand, int[] positions)
     {
-        return UnityRandom.Range(-(_widthSpawner / 2), _widthSpawner / 2);
+        int placeOld, placeNew;
+        int element;
+
+        for (int i = 0; i < positions.Length; i++)
+        {
+            placeOld = rand.Next(0, positions.Length);
+            placeNew = rand.Next(0, positions.Length);
+            element = positions[placeOld];
+            positions[placeOld] = positions[placeNew];
+            positions[placeNew] = element;
+        }
     }
 }

@@ -281,11 +281,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _container: {fileID: 520898931}
   _capacity: 5
-  _checkPoint: {fileID: 1289691321}
   _prefab: {fileID: 961672164154834500, guid: 01bac4403b3959545b4a108b89012fa3, type: 3}
   _spawnPoint: {fileID: 291291465}
   _target: {fileID: 816856502}
   _widthSpawner: 20
+  _checkPoint: {fileID: 1289691321}
 --- !u!1 &506072157
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,11 +1041,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _container: {fileID: 830314288}
   _capacity: 30
-  _checkPoint: {fileID: 1289691321}
   _prefab: {fileID: 5685355693221574024, guid: 4ddd3ef88cba96b46b73c3012bdc57e1, type: 3}
   _spawnPoint: {fileID: 1006895424}
   _target: {fileID: 816856502}
-  _widthSpawner: 20
+  _widthSpawner: 19
+  _checkPoint: {fileID: 1289691321}
 --- !u!1 &1010214149
 GameObject:
   m_ObjectHideFlags: 0
