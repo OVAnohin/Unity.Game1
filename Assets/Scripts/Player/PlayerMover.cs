@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-
-public class SphereMover : MonoBehaviour
+public class PlayerMover : MonoBehaviour
 {
-    [SerializeField] private float _speed;
-    [SerializeField] private float _zAngle;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _rotateSpeed;
     [SerializeField] private float _jumpForce;
 
-    private Rigidbody _rigidbody;
     private bool _isJumping = false;
+    private Rigidbody _rigidbody;
 
     private void Awake()
     {
@@ -24,8 +23,9 @@ public class SphereMover : MonoBehaviour
             _isJumping = true;
         }
 
-        transform.position = transform.position + Vector3.right * _speed * Time.deltaTime;
-        transform.Rotate(0, 0, _zAngle);
+        transform.position = transform.position + Vector3.right * _moveSpeed * Time.deltaTime;
+
+        transform.rotation *= Quaternion.Euler(0, 0, _rotateSpeed);
     }
 
     private void OnCollisionEnter(Collision collision)

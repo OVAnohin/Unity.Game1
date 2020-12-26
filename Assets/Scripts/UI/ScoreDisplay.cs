@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class ScoreDisplay : MonoBehaviour
 {
-    [SerializeField] private Sphere _sphere;
+    [SerializeField] private Player _player;
     [SerializeField] private TMP_Text _scoreDisplay;
 
     private void OnEnable()
     {
-        _sphere.ScoreChanged += DisplayScore;
+        _player.ScoreChanged += DisplayScore;
     }
 
     private void OnDisable()
     {
-        _sphere.ScoreChanged -= DisplayScore;
+        _player.ScoreChanged -= DisplayScore;
     }
 
     private void DisplayScore(int score)

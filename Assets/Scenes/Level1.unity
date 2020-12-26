@@ -187,105 +187,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &177836061
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 177836063}
-  - component: {fileID: 177836062}
-  m_Layer: 0
-  m_Name: Ground
-  m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &177836062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 177836061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2467f4a7d87b60b4498c8caf9bd4f4f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _groundPrefab: {fileID: 4573007207774703476, guid: 2bc7810ff169d8849afdcb1c5c00f154,
-    type: 3}
-  _groundPool: {fileID: 177836063}
-  _player: {fileID: 816856503}
-  _lengthPlayingField: 50
-  _widthPlayingField: 20
---- !u!4 &177836063
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 177836061}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &291291464
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 291291465}
-  - component: {fileID: 291291466}
-  m_Layer: 0
-  m_Name: CoinSpawnpoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &291291465
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 291291464}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &291291466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 291291464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4400543e49e86ab4888411ed38c5639e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _container: {fileID: 520898931}
-  _capacity: 5
-  _prefab: {fileID: 961672164154834500, guid: 01bac4403b3959545b4a108b89012fa3, type: 3}
-  _spawnPoint: {fileID: 291291465}
-  _target: {fileID: 816856502}
-  _widthSpawner: 20
-  _checkPoint: {fileID: 1289691321}
 --- !u!1 &506072157
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,14 +264,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506072157}
-  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 0, y: 8, z: -10}
+  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalPosition: {x: 0, y: 3, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1289691321}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
 --- !u!114 &506072161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,36 +285,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 816856502}
---- !u!1 &520898931
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 520898932}
-  m_Layer: 0
-  m_Name: CoinPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &520898932
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 520898931}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.718067, y: -6.0629416, z: 1.4189949}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1010214150}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &601733458
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,7 +349,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.9
+  m_fontSize: 36.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -544,7 +415,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.23}
   m_AnchorMax: {x: 0, y: 0.73}
-  m_AnchoredPosition: {x: -40.589996, y: 1}
+  m_AnchoredPosition: {x: -30.3, y: 1}
   m_SizeDelta: {x: 64.77985, y: -2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &690865461
@@ -581,8 +452,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 18, y: 28}
+  m_AnchoredPosition: {x: 0.00017547607, y: 0.0038986206}
+  m_SizeDelta: {x: 0.0005493164, y: 0.0009689331}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &690865463
 MonoBehaviour:
@@ -733,7 +604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d5552968660cd498461c5f761da5bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sphere: {fileID: 816856503}
+  _player: {fileID: 816856503}
   _scoreDisplay: {fileID: 601733459}
 --- !u!1 &816856498
 GameObject:
@@ -747,11 +618,11 @@ GameObject:
   - component: {fileID: 816856501}
   - component: {fileID: 816856500}
   - component: {fileID: 816856499}
-  - component: {fileID: 816856503}
   - component: {fileID: 816856504}
   - component: {fileID: 816856505}
+  - component: {fileID: 816856503}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -825,7 +696,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816856498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -840,7 +711,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 816856498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aac6a85404900346810675cbe1e58d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 2541a752258533843bd23b8f1fe8d8d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &816856504
@@ -855,9 +726,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e460b14c33c144497be49b71af3851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
-  _zAngle: -3
-  _jumpForce: 7.5
+  _moveSpeed: 5
+  _rotateSpeed: -10
+  _jumpForce: 7
 --- !u!54 &816856505
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -874,36 +745,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &830314288
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 830314290}
-  m_Layer: 0
-  m_Name: BouldersPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &830314290
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 830314288}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.718067, y: -6.0629416, z: 1.4189949}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1010214150}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989452408
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,7 +837,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1006895423
+--- !u!1 &1154552741
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1004,79 +845,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1006895424}
-  - component: {fileID: 1006895425}
+  - component: {fileID: 1154552743}
+  - component: {fileID: 1154552742}
   m_Layer: 0
-  m_Name: BouldersSpawnpoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1006895424
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006895423}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1006895425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006895423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6682e0184546f1b44a866a1d8ef72f35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _container: {fileID: 830314288}
-  _capacity: 30
-  _prefab: {fileID: 5685355693221574024, guid: 4ddd3ef88cba96b46b73c3012bdc57e1, type: 3}
-  _spawnPoint: {fileID: 1006895424}
-  _target: {fileID: 816856502}
-  _widthSpawner: 19
-  _checkPoint: {fileID: 1289691321}
---- !u!1 &1010214149
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1010214150}
-  m_Layer: 0
-  m_Name: Pools
+  m_Name: Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1010214150
+--- !u!114 &1154552742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154552741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e7cb90e97b40e47882df7f84db4176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectPrefabs:
+  - {fileID: 123503111169420752, guid: 4ddd3ef88cba96b46b73c3012bdc57e1, type: 3}
+  - {fileID: 8956121039704253516, guid: 0965f101b7fc7e24c813413e006ae41b, type: 3}
+  - {fileID: 8876091258570272229, guid: 360ccd9f1807da54aa3a56dc5a80a08a, type: 3}
+  _player: {fileID: 816856502}
+  _viewRadius: 15
+  _cellSize: 1
+--- !u!4 &1154552743
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1010214149}
+  m_GameObject: {fileID: 1154552741}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.281933, y: 6.0629416, z: -1.4189949}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 830314290}
-  - {fileID: 520898932}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1289691320
 GameObject:
@@ -1140,8 +949,8 @@ RectTransform:
   m_Father: {fileID: 725000001}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.6776797, y: 0.81651044}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 70, y: -20.5}
-  m_SizeDelta: {x: -230, y: -41}
+  m_AnchorMin: {x: 0.85815424, y: 0.81950414}
+  m_AnchorMax: {x: 0.96300006, y: 0.94900006}
+  m_AnchoredPosition: {x: 20.190002, y: 0.3000183}
+  m_SizeDelta: {x: -42.38498, y: -1.187027}
   m_Pivot: {x: 0.5, y: 0.5}

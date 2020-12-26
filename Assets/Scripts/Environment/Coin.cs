@@ -2,11 +2,17 @@
 
 public class Coin : MonoBehaviour
 {
+    [SerializeField] private float _rotateSpeed;
+
+    private void Update()
+    {
+        transform.Rotate(0, _rotateSpeed, 0);
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<Sphere>(out Sphere sphere))
+        if (other.TryGetComponent(out Player player))
         {
-            sphere.TakeCoin();
+            player.TakeCoin();
             gameObject.SetActive(false);
         }
     }

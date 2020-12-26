@@ -1,46 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public abstract class ObjectPool : MonoBehaviour
 {
-    [SerializeField] private GameObject _container;
-    [SerializeField] private int _capacity;
+    private List<GridObject> _pool = new List<GridObject>();
 
-    protected GameObject Container => _container;
-
-    private List<GameObject> _pool = new List<GameObject>();
-
-    protected void Initialize(GameObject prefab)
+    protected void Initialize(GridObject prefab)
     {
-        for (int i = 0; i < _capacity; i++)
+        int capacity = prefab.Capacity;
+        for (int i = 0; i < capacity; i++)
         {
-            GameObject spawned = Instantiate(prefab, _container.transform);
-            spawned.SetActive(false);
+            GridObject spawned = Instantiate(prefab, Vector3.zero, Quaternion.identity, transform);
+            spawned.gameObject.SetActive(false);
             _pool.Add(spawned);
         }
     }
 
-    protected void DisableObjectAbroadScreen(float x)
+    protected bool TryGetObject(out GridObject result, GridLayer layer)
     {
-        foreach (var item in _pool)
+        GridObject[] variants = _pool.Where(p => p.gameObject.activeSelf == false && p.Layer == layer).ToArray();
+        result = null;
+
+        if (variants.Count() > 0)
         {
-            if (item.activeSelf == true)
-            {
-                if (x > item.transform.position.x)
-                {
-                    item.SetActive(false);
-                    item.transform.parent = Container.transform;
-                }
-            }
+            variants.Shuffle();
+
+            result = variants.First();
+            if (result.Chance == 100 || result.Chance > Random.Range(0, 100))
+                return result != null;
         }
-    }
 
-    protected bool TryGetObject(out GameObject result)
-    {
-        result = _pool.FirstOrDefault(p => p.activeSelf == false);
-
-        return result != null;
+        return false;
     }
 }
