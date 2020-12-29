@@ -287,7 +287,7 @@ MonoBehaviour:
   _target: {fileID: 816856502}
   _distance: 7
   _height: 1
-  _delay: 7
+  _delay: 1.5
 --- !u!1 &601733458
 GameObject:
   m_ObjectHideFlags: 0
