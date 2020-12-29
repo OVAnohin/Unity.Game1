@@ -8,6 +8,7 @@ public class Coin : MonoBehaviour
     {
         transform.Rotate(0, _rotateSpeed, 0);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Player player))

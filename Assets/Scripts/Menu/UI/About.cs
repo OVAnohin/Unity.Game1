@@ -2,7 +2,7 @@
 using DG.Tweening;
 using System;
 
-public class ShowAuthors : MonoBehaviour
+public class About : MonoBehaviour
 {
     [SerializeField] private float _time = 0;
     [SerializeField] private float _offset;

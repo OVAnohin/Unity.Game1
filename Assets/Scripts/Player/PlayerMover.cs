@@ -23,7 +23,7 @@ public class PlayerMover : MonoBehaviour
             _isJumping = true;
         }
 
-        transform.position = transform.position + Vector3.right * _moveSpeed * Time.deltaTime;
+        transform.Translate(Vector3.right * _moveSpeed * Time.deltaTime, Space.World);
 
         transform.rotation *= Quaternion.Euler(0, 0, _rotateSpeed);
     }

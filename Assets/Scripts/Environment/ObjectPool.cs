@@ -6,6 +6,8 @@ public abstract class ObjectPool : MonoBehaviour
 {
     private List<GridObject> _pool = new List<GridObject>();
 
+    protected List<GridObject> Pool => _pool;
+
     protected void Initialize(GridObject prefab)
     {
         int capacity = prefab.Capacity;

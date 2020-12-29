@@ -43,20 +43,17 @@ public class LevelGenerator : ObjectPool
         var cellCountOnAxis = (int)(viewRadius / _cellSize);
         var areaCenter = WorldToGridPosition(center);
 
-        List<Transform> childrens = GetComponentsInChildren<Transform>().ToList();
-        var gridObjects = childrens.Where(wv => wv.GetComponent<GridObject>() != false).ToList();
+        var gridObjects = from go in Pool
+                          let magnitudeZ = new Vector3Int(0, 0, (int)go.transform.position.z - (int)areaCenter.z)
+                          let magnitudeX = new Vector3Int((int)go.transform.position.x - (int)areaCenter.x, 0, 0)
+                          where (magnitudeX.magnitude > cellCountOnAxis || magnitudeZ.magnitude > cellCountOnAxis)
+                          select go;
 
-        if (gridObjects.Count > 0)
+        foreach (var item in gridObjects)
         {
-            foreach (var item in gridObjects)
-            {
-                if ((areaCenter - item.position).magnitude > cellCountOnAxis || (areaCenter - item.position).magnitude > cellCountOnAxis)
-                {
-                    var position = WorldToGridPosition(item.position);
-                    _collisionsMatrix.Remove(position);
-                    item.gameObject.SetActive(false);
-                }
-            }
+            var position = WorldToGridPosition(item.transform.position);
+            _collisionsMatrix.Remove(position);
+            item.gameObject.SetActive(false);
         }
     }
 
@@ -69,7 +66,8 @@ public class LevelGenerator : ObjectPool
         else
             _collisionsMatrix.Add(gridPosition);
 
-        if (TryGetObject(out GridObject element, layer))
+        GridObject element;
+        if (TryGetObject(out element, layer))
         {
             var position = GridToWorldPosition(gridPosition);
             element.gameObject.SetActive(true);

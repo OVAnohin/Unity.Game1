@@ -5,16 +5,21 @@ using UnityEngine;
 public class Follow : MonoBehaviour
 {
     [SerializeField] private Transform _target;
-    
-    private Vector3 _offset;
+    [SerializeField] private float _distance;
+    [SerializeField] private float _height;
+    [SerializeField] private float _delay;
+
+    private Vector3 _constantYZ;
 
     private void Start()
     {
-        _offset = transform.position;
+        _constantYZ = _target.position + _target.up * _height - _target.forward * _distance;
+        transform.position = _constantYZ;
     }
 
     private void LateUpdate()
     {
-        transform.position = new Vector3(_target.position.x, _offset.y, _offset.z);
+        Vector3 targetPos = new Vector3(_target.position.x, _constantYZ.y, _constantYZ.z);
+        transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * _delay);
     }
 }
