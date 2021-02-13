@@ -20,6 +20,7 @@ public class LevelGenerator : ObjectPool
     private void Update()
     {
         FillRadius(_player.position, _viewRadius);
+        Debug.Log(_collisionsMatrix.Count);
         UnFillElements(_player.position, _viewRadius);
     }
 
@@ -27,15 +28,17 @@ public class LevelGenerator : ObjectPool
     {
         var cellCountOnAxis = (int)(viewRadius / _cellSize);
         var fillAreaCenter = WorldToGridPosition(center);
-
+        int count = 0;
         for (int x = -cellCountOnAxis; x < cellCountOnAxis; x++)
         {
             for (int z = -cellCountOnAxis; z < cellCountOnAxis; z++)
             {
                 TryCreateOnLayer(GridLayer.Ground, fillAreaCenter + new Vector3Int(x, 0, z));
                 TryCreateOnLayer(GridLayer.OnGround, fillAreaCenter + new Vector3Int(x, 0, z));
+                count++;
             }
         }
+        Debug.Log(count);
     }
 
     private void UnFillElements(Vector3 center, float viewRadius)

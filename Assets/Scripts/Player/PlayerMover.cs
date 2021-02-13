@@ -3,8 +3,7 @@
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMover : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _rotateSpeed;
+    [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
 
     private bool _isJumping = false;
@@ -15,7 +14,7 @@ public class PlayerMover : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.Space) && _isJumping == false)
         {
@@ -23,9 +22,7 @@ public class PlayerMover : MonoBehaviour
             _isJumping = true;
         }
 
-        transform.Translate(Vector3.right * _moveSpeed * Time.deltaTime, Space.World);
-
-        transform.rotation *= Quaternion.Euler(0, 0, _rotateSpeed);
+        _rigidbody.velocity = new Vector3(_speed * Time.deltaTime, _rigidbody.velocity.y, 0);
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -264,14 +264,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506072157}
-  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1289691321}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &506072161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,9 +285,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 816856502}
-  _distance: 7
-  _height: 1
-  _delay: 1.5
+  _vectorOffcet: {x: 2, y: 2, z: -7}
+  _speed: 15
 --- !u!1 &601733458
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +351,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36.2
+  m_fontSize: 35.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -455,7 +454,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00017547607, y: 0.0038986206}
+  m_AnchoredPosition: {x: 0.00018310547, y: 0.00390625}
   m_SizeDelta: {x: 0.0005493164, y: 0.0009689331}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &690865463
@@ -621,9 +620,9 @@ GameObject:
   - component: {fileID: 816856501}
   - component: {fileID: 816856500}
   - component: {fileID: 816856499}
-  - component: {fileID: 816856504}
   - component: {fileID: 816856505}
   - component: {fileID: 816856503}
+  - component: {fileID: 816856504}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -729,9 +728,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e460b14c33c144497be49b71af3851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
-  _rotateSpeed: -10
-  _jumpForce: 7
+  _speed: 150
+  _jumpForce: 7.5
 --- !u!54 &816856505
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -746,7 +744,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 56
   m_CollisionDetection: 0
 --- !u!1 &989452408
 GameObject:
@@ -954,6 +952,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.85815424, y: 0.81950414}
   m_AnchorMax: {x: 0.96300006, y: 0.94900006}
-  m_AnchoredPosition: {x: 20.190002, y: 0.3000183}
+  m_AnchoredPosition: {x: 20.189941, y: 0.29992676}
   m_SizeDelta: {x: -42.38498, y: -1.187027}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -121,4 +121,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _layer: 0
   _chance: 100
-  _capacity: 1000
+  _capacity: 2000

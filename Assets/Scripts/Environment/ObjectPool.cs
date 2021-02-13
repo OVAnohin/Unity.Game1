@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public abstract class ObjectPool : MonoBehaviour
@@ -21,14 +20,14 @@ public abstract class ObjectPool : MonoBehaviour
 
     protected bool TryGetObject(out GridObject result, GridLayer layer)
     {
-        GridObject[] variants = _pool.Where(p => p.gameObject.activeSelf == false && p.Layer == layer).ToArray();
+        GridObject[] variants = _pool.FindAll(p => p.gameObject.activeSelf == false && p.Layer == layer).ToArray();
         result = null;
 
-        if (variants.Count() > 0)
+        if (variants.Length > 0)
         {
             variants.Shuffle();
 
-            result = variants.First();
+            result = variants[0];
             if (result.Chance == 100 || result.Chance > Random.Range(0, 100))
                 return result != null;
         }
