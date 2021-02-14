@@ -1,81 +1,91 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LevelGenerator : ObjectPool
 {
-    [SerializeField] private GridObject[] _objectPrefabs;
     [SerializeField] private Transform _player;
     [SerializeField] private float _viewRadius;
     [SerializeField] private float _cellSize;
 
-    private HashSet<Vector3Int> _collisionsMatrix = new HashSet<Vector3Int>();
+    private List<MatrixElement> _collisionsMatrix = new List<MatrixElement>();
+    private int _cellCountOnAxis;
+    private int _oneHundredPercent;
 
     private void Awake()
     {
-        foreach (var item in _objectPrefabs)
-            Initialize(item);
+        Initialize();
+        _cellCountOnAxis = (int)(_viewRadius / _cellSize);
+        _oneHundredPercent = (int)Mathf.Pow(_cellCountOnAxis * 2, 2);
     }
 
     private void Update()
     {
-        FillRadius(_player.position, _viewRadius);
-        Debug.Log(_collisionsMatrix.Count);
-        UnFillElements(_player.position, _viewRadius);
+        FillRadius(_player.position);
+        UnFillElements(_player.position);
     }
 
-    private void FillRadius(Vector3 center, float viewRadius)
+    private void FillRadius(Vector3 center)
     {
-        var cellCountOnAxis = (int)(viewRadius / _cellSize);
         var fillAreaCenter = WorldToGridPosition(center);
-        int count = 0;
-        for (int x = -cellCountOnAxis; x < cellCountOnAxis; x++)
+        for (int x = _cellCountOnAxis; x > -_cellCountOnAxis; x--)
         {
-            for (int z = -cellCountOnAxis; z < cellCountOnAxis; z++)
+            for (int z = _cellCountOnAxis; z > -_cellCountOnAxis; z--)
             {
                 TryCreateOnLayer(GridLayer.Ground, fillAreaCenter + new Vector3Int(x, 0, z));
                 TryCreateOnLayer(GridLayer.OnGround, fillAreaCenter + new Vector3Int(x, 0, z));
-                count++;
             }
         }
-        Debug.Log(count);
     }
 
-    private void UnFillElements(Vector3 center, float viewRadius)
+    private void UnFillElements(Vector3 center)
     {
-        var cellCountOnAxis = (int)(viewRadius / _cellSize);
         var areaCenter = WorldToGridPosition(center);
 
-        var gridObjects = from go in Pool
-                          let magnitudeZ = new Vector3Int(0, 0, (int)go.transform.position.z - (int)areaCenter.z)
-                          let magnitudeX = new Vector3Int((int)go.transform.position.x - (int)areaCenter.x, 0, 0)
-                          where (magnitudeX.magnitude > cellCountOnAxis || magnitudeZ.magnitude > cellCountOnAxis)
-                          select go;
+        MatrixElement[] distantElements = new MatrixElement[_collisionsMatrix.ToArray().Length];
+        Array.Copy(_collisionsMatrix.ToArray(), distantElements, _collisionsMatrix.ToArray().Length);
 
-        foreach (var item in gridObjects)
+        foreach (var element in distantElements)
         {
-            var position = WorldToGridPosition(item.transform.position);
-            _collisionsMatrix.Remove(position);
-            item.gameObject.SetActive(false);
+            var magnitudeZ = new Vector3Int(0, 0, element.Position.z - areaCenter.z);
+            var magnitudeX = new Vector3Int(element.Position.x - areaCenter.x, 0, 0);
+            if (magnitudeX.magnitude > _cellCountOnAxis || magnitudeZ.magnitude > _cellCountOnAxis)
+            {
+                element.Item.gameObject.SetActive(false);
+                _collisionsMatrix.Remove(element);
+            }
         }
     }
 
     private void TryCreateOnLayer(GridLayer layer, Vector3Int gridPosition)
     {
         gridPosition.y = (int)layer;
-
-        if (_collisionsMatrix.Contains(gridPosition))
+        if (_collisionsMatrix.Find(p => p.Position == gridPosition) != null)
             return;
-        else
-            _collisionsMatrix.Add(gridPosition);
 
-        GridObject element;
-        if (TryGetObject(out element, layer))
+        GridObject element = GetObject(layer);
+
+        if (element.Chance == 100)
         {
-            var position = GridToWorldPosition(gridPosition);
-            element.gameObject.SetActive(true);
-            element.transform.position = position;
+            ActiveElementInHierarchy(gridPosition, element);
         }
+        else 
+        {
+            var chance = (element.Chance * _oneHundredPercent) / 100;
+
+            if (_collisionsMatrix.FindAll(e => e.Item.Chance == element.Chance).Count < chance && element.Chance > Random.Range(0, 100))
+                ActiveElementInHierarchy(gridPosition, element);
+        }
+    }
+
+    private void ActiveElementInHierarchy(Vector3Int gridPosition, GridObject element)
+    {
+        Vector3 position = GridToWorldPosition(gridPosition);
+        element.gameObject.SetActive(true);
+        element.transform.position = position;
+        MatrixElement matrixElement = new MatrixElement(gridPosition, element);
+        _collisionsMatrix.Add(matrixElement);
     }
 
     private Vector3Int WorldToGridPosition(Vector3 worldPosition)
@@ -86,5 +96,17 @@ public class LevelGenerator : ObjectPool
     private Vector3 GridToWorldPosition(Vector3Int gridPosition)
     {
         return new Vector3(gridPosition.x * _cellSize, gridPosition.y * _cellSize, gridPosition.z * _cellSize);
+    }
+
+    private class MatrixElement
+    {
+        public Vector3Int Position { get; private set; }
+        public GridObject Item { get; private set; }
+
+        public MatrixElement(Vector3Int position, GridObject item)
+        {
+            Position = position;
+            Item = item;
+        }
     }
 }

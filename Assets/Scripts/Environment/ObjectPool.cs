@@ -3,35 +3,56 @@ using UnityEngine;
 
 public abstract class ObjectPool : MonoBehaviour
 {
-    private List<GridObject> _pool = new List<GridObject>();
+    [SerializeField] private List<PoolItem> _items;
+    
+    private List<GridObject> _pooledItems;
 
-    protected List<GridObject> Pool => _pool;
-
-    protected void Initialize(GridObject prefab)
+    protected void Initialize()
     {
-        int capacity = prefab.Capacity;
-        for (int i = 0; i < capacity; i++)
+        _pooledItems = new List<GridObject>();
+
+        foreach (PoolItem item in _items)
         {
-            GridObject spawned = Instantiate(prefab, Vector3.zero, Quaternion.identity, transform);
-            spawned.gameObject.SetActive(false);
-            _pool.Add(spawned);
+            for (int i = 0; i < item.Amount; i++)
+            {
+                GridObject gredObject = item.Prefab.GetComponent<GridObject>();
+                SpawnGridObject(gredObject);
+            }
         }
     }
 
-    protected bool TryGetObject(out GridObject result, GridLayer layer)
+    protected GridObject GetObject(GridLayer layer)
     {
-        GridObject[] variants = _pool.FindAll(p => p.gameObject.activeSelf == false && p.Layer == layer).ToArray();
-        result = null;
+        GridObject result;
+
+        GridObject[] variants = _pooledItems.FindAll(p => p.gameObject.activeSelf == false && p.Layer == layer).ToArray();
 
         if (variants.Length > 0)
         {
             variants.Shuffle();
-
             result = variants[0];
-            if (result.Chance == 100 || result.Chance > Random.Range(0, 100))
-                return result != null;
+        }
+        else
+        {
+            GridObject gredObject = _items.Find(p => p.Prefab.GetComponent<GridObject>().Layer == layer).Prefab.GetComponent<GridObject>();
+            SpawnGridObject(gredObject);
+            result = _pooledItems.Find(p => p.gameObject.activeSelf == false && p.Layer == layer);
         }
 
-        return false;
+        return result;
     }
+
+    private void SpawnGridObject(GridObject gredObject)
+    {
+        GridObject spawned = Instantiate(gredObject, Vector3.zero, Quaternion.identity, transform);
+        spawned.gameObject.SetActive(false);
+        _pooledItems.Add(spawned);
+    }
+}
+
+[System.Serializable]
+public class PoolItem
+{
+    public GameObject Prefab;
+    public int Amount;
 }

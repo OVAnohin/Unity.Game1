@@ -14,7 +14,7 @@ public class PlayerMover : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (Input.GetKey(KeyCode.Space) && _isJumping == false)
         {

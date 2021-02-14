@@ -16,8 +16,6 @@ public class Follow : MonoBehaviour
     private void Update()
     {
         Vector3 targetPosition = new Vector3(_target.position.x + _vectorOffcet.x, _vectorOffcet.y, _vectorOffcet.z);
-
-        if (targetPosition.x != transform.position.x)
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, _speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, _speed * Time.deltaTime);
     }
 }
