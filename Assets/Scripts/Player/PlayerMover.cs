@@ -3,26 +3,42 @@
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMover : MonoBehaviour
 {
-    [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
+    [SerializeField] private float _movementSpeed;
+    [SerializeField] private float _rotationSpeed;
 
     private bool _isJumping = false;
-    private Rigidbody _rigidbody;
+    private Rigidbody _playerRigidbody;
+    private float _turnAngle = -10f;
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        _playerRigidbody = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.Space) && _isJumping == false)
         {
-            _rigidbody.velocity = Vector3.up * _jumpForce;
+            _playerRigidbody.velocity = Vector3.up * _jumpForce;
             _isJumping = true;
         }
 
-        _rigidbody.velocity = new Vector3(_speed * Time.deltaTime, _rigidbody.velocity.y, 0);
+        MoveThePlayer();
+        TurnThePlayer();
+    }
+
+    private void MoveThePlayer()
+    {
+        Vector3 movement = Vector3.right * _movementSpeed * Time.deltaTime;
+        _playerRigidbody.MovePosition(transform.position + movement);
+    }
+
+    private void TurnThePlayer()
+    {
+        Quaternion turn = _playerRigidbody.rotation * Quaternion.Euler(0, 0, _turnAngle);
+        Quaternion rotation = Quaternion.Slerp(_playerRigidbody.rotation, turn, _rotationSpeed);
+        _playerRigidbody.MoveRotation(rotation);
     }
 
     private void OnCollisionEnter(Collision collision)

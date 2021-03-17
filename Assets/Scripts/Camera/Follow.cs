@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class Follow : MonoBehaviour
 {
+    [SerializeField] private Vector3 _offset;
     [SerializeField] private Transform _target;
-    [SerializeField] private Vector3 _vectorOffcet;
-    [SerializeField] private float _speed;
 
     private void Start()
     {
-        transform.position = _target.position + _vectorOffcet;
+        transform.position = _target.position + _offset;
     }
 
     private void Update()
     {
-        Vector3 targetPosition = new Vector3(_target.position.x + _vectorOffcet.x, _vectorOffcet.y, _vectorOffcet.z);
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, _speed * Time.deltaTime);
+        transform.position = new Vector3(_target.position.x + _offset.x, _offset.y, _offset.z);
     }
 }

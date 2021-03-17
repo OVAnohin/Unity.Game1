@@ -1,17 +1,20 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GridObject : MonoBehaviour
 {
-    [SerializeField] private GridLayer _layer;
-    [SerializeField] private int _chance;
+    [SerializeField] private GridObjectData _gridObject;
 
-    public GridLayer Layer => _layer;
-    public int Chance => _chance;
+    public GridLayer Layer { get; private set; }
+    public int Chance { get; private set; }
+    public string NickName { get; private set; }
 
-    private void OnValidate()
+    public void Init()
     {
-        _chance = Mathf.Clamp(_chance, 1, 100);
+        Chance = _gridObject.Chance;
+        Layer = _gridObject.Layer;
+        GetComponent<MeshRenderer>().material = _gridObject.Material;
+        NickName = _gridObject.NickName;
     }
 }
