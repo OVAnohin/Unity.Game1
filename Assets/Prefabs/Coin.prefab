@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 60c66fc117d439e41adabfd8358e2b95, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,7 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9983777aafe5ae847aea825c73b96d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridObject: {fileID: 11400000, guid: f01e2d6b1fb605444aeac9deb388d93f, type: 2}
+  _layer: 1
+  _chance: 1
+  _nickName: Coin
 --- !u!114 &5870511761026543050
 MonoBehaviour:
   m_ObjectHideFlags: 0

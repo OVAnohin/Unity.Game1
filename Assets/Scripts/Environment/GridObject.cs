@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class GridObject : MonoBehaviour
 {
-    [SerializeField] private GridObjectData _gridObject;
+    [SerializeField] private GridLayer _layer;
+    [SerializeField] private int _chance;
+    [SerializeField] private string _nickName;
 
-    public GridLayer Layer { get; private set; }
-    public int Chance { get; private set; }
-    public string NickName { get; private set; }
+    public GridLayer Layer => _layer;
+    public int Chance => _chance;
+    public string NickName => _nickName;
 
-    public void Init()
+    private void OnValidate()
     {
-        Chance = _gridObject.Chance;
-        Layer = _gridObject.Layer;
-        GetComponent<MeshRenderer>().material = _gridObject.Material;
-        NickName = _gridObject.NickName;
+        _chance = Mathf.Clamp(_chance, 1, 100);
     }
 }
