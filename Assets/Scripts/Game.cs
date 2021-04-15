@@ -11,6 +11,7 @@ public class Game : MonoBehaviour
     private Chunk[] _chunks = new Chunk[3];
     private int _currenIndex = 0;
     private Vector3 _lastPosition;
+    private int _ratio = 3;
 
     private void Start()
     {
@@ -21,27 +22,29 @@ public class Game : MonoBehaviour
         }
 
         _chunkLength = _chunks[_currenIndex].ChunkLength;
-        _lastPosition = _chunks[_currenIndex].ResetChunk(new Vector3(_player.position.x, 0, _player.position.z));
+        _lastPosition = _chunks[_currenIndex].MoveChunk(new Vector3(_player.position.x, 0, _player.position.z));
         _currenIndex++;
     }
 
     private void FixedUpdate()
     {
-        if (_player.position.x > _lastPosition.x - (_chunkLength * 3))
+        if (_player.position.x > _lastPosition.x - (_chunkLength * _ratio))
         {
             if (_currenIndex < _chunks.Length)
-                ResetChunk(_currenIndex);
+            {
+                MoveChunk(_currenIndex);
+            }
             else
             {
                 _currenIndex = 0;
-                ResetChunk(_currenIndex);
+                MoveChunk(_currenIndex);
             }
             _currenIndex++;
         }
     }
 
-    private void ResetChunk(int index)
+    private void MoveChunk(int index)
     {
-        _lastPosition = _chunks[index].ResetChunk(_lastPosition);
+        _lastPosition = _chunks[index].MoveChunk(_lastPosition);
     }
 }

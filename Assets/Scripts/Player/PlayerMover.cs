@@ -24,17 +24,17 @@ public class PlayerMover : MonoBehaviour
             _isJumping = true;
         }
 
-        MoveThePlayer();
-        TurnThePlayer();
+        Move();
+        Turn();
     }
 
-    private void MoveThePlayer()
+    private void Move()
     {
         Vector3 movement = Vector3.right * _movementSpeed * Time.deltaTime;
         _playerRigidbody.MovePosition(transform.position + movement);
     }
 
-    private void TurnThePlayer()
+    private void Turn()
     {
         Quaternion turn = _playerRigidbody.rotation * Quaternion.Euler(0, 0, _turnAngle);
         Quaternion rotation = Quaternion.Slerp(_playerRigidbody.rotation, turn, _rotationSpeed);

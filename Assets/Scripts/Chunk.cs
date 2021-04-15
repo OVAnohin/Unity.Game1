@@ -35,16 +35,16 @@ public class Chunk : MonoBehaviour
         _pool.Add(spawned);
     }
 
-    public Vector3 ResetChunk(Vector3 center)
+    public Vector3 MoveChunk(Vector3 center)
     {
         transform.position = center;
 
-        StartCoroutine(Reset());
+        StartCoroutine(CreateNewChunkShape());
 
         return new Vector3(center.x + _chunkLength * 2, center.y, center.z);
     }
 
-    private IEnumerator Reset()
+    private IEnumerator CreateNewChunkShape()
     {
         _elapsed = 0;
 
